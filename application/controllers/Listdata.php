@@ -49,9 +49,9 @@ class Listdata extends CI_Controller
 		$nis = $data['rekap']->nis;
 		$data['tindakan'] = $this->model->getBy('tindakan', 'id_tindakan', $data['rekap']->id_tindakan)->row();
 		$data['konversi'] = $this->model->getBy('konversi', 'id_tindakan', $data['rekap']->id_tindakan)->result();
-		$data['dataRekap'] = $this->db->query("SELECT konversi.nama AS nama, konversi.nominal, jumlah, id_rekap, status FROM rekap JOIN konversi ON rekap.id_konversi=konversi.id_konversi WHERE nis = $nis ")->result();
 		$data['santri'] = $this->model->getBy('tb_santri', 'nis', $data['rekap']->nis)->row();
 		$idtindakan = $data['rekap']->id_tindakan;
+		$data['dataRekap'] = $this->db->query("SELECT konversi.nama AS nama, konversi.nominal, jumlah, id_rekap, status FROM rekap JOIN konversi ON rekap.id_konversi=konversi.id_konversi WHERE nis = $nis AND rekap.id_tindakan = '$idtindakan' ")->result();
 		$data['santriRekap'] = $this->db->query("SELECT id_rekap, tb_santri.nama FROM tb_santri JOIN rekap ON tb_santri.nis=rekap.nis WHERE rekap.id_tindakan = '$idtindakan' GROUP BY rekap.nis ")->result();
 
 		$this->load->view('edit', $data);

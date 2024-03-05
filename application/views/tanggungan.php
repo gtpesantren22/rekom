@@ -29,7 +29,7 @@
                                 <td><?= $dt->pj ?></td>
                                 <td><?= $dt->jkl == 'Laki-laki' ? 'Putra' : 'Putri' ?></td>
                                 <td>
-                                    <?php if ($user->id_user === $dt->id_user) : ?>
+                                    <?php if ($user->id_user === $dt->id_user || $user->level == 'admin') : ?>
                                         <a href="<?= base_url("tanggungan/del/$dt->id_tindakan") ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fa fa-trash"></i> Del</a>
                                         <a href="<?= base_url("tanggungan/conv/$dt->id_tindakan") ?>" class="btn btn-primary btn-sm"><i class="fa fa-exchange"></i> Konversi</a>
                                         <a href="<?= base_url("tanggungan/generate/$dt->id_tindakan") ?>" class="btn btn-info btn-sm tbl-confirm" value="Generete tanggungan untuk semua santri"><i class="fa fa-refresh"></i> Generate</a>

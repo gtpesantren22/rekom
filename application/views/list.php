@@ -26,7 +26,7 @@
                                 <td><?= $dt->pj ?></td>
                                 <td><?= $dt->jkl == 'Laki-laki' ? 'Putra' : 'Putri' ?></td>
                                 <td>
-                                    <?php if ($user->id_user === $dt->id_user) : ?>
+                                    <?php if ($user->id_user === $dt->id_user || $user->level == 'admin') : ?>
                                         <a href="<?= base_url("listdata/detail/$dt->id_tindakan") ?>" class="btn btn-warning btn-sm"><i class="fa fa-list"></i> Lihat List Santri</a>
                                         <a href="<?= base_url("listdata/del/$dt->id_tindakan") ?>" class="btn btn-danger btn-sm tombol-hapus"><i class="fa fa-times"></i> Drop</a>
                                     <?php endif ?>

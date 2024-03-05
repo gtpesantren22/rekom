@@ -139,6 +139,8 @@ class Listdata extends CI_Controller
 				$tindakan = $this->model->getBy('tindakan', 'id_tindakan', $idtindakan)->row();
 				$data_abtch = array();
 				foreach ($data as $dtsan) {
+					$cek = $this->model->getBy3('rekap', 'nis', $dtsan->nis, 'id_tindakan', $idtindakan, 'status', 'belum')->row();
+					$stts = $cek ? 'belum' : 'lunas';
 					$data_abtch[] = [
 						'id_rekap' => $dtsan->id_rekap,
 						'id_tindakan' => $idtindakan,
@@ -146,7 +148,7 @@ class Listdata extends CI_Controller
 						'nis' => $dtsan->nis,
 						'nominal' => $dtsan->nominal,
 						'ket' => $tindakan->pj,
-						'status' => $dtsan->status,
+						'status' => $stts,
 					];
 				}
 				$sql = $this->model->simpanBatchSantri('rekap', $data_abtch);
@@ -163,6 +165,8 @@ class Listdata extends CI_Controller
 			$tindakan = $this->model->getBy('tindakan', 'id_tindakan', $idtindakan)->row();
 			$data_abtch = array();
 			foreach ($data as $dtsan) {
+				$cek = $this->model->getBy3('rekap', 'nis', $dtsan->nis, 'id_tindakan', $idtindakan, 'status', 'belum')->row();
+				$stts = $cek ? 'belum' : 'lunas';
 				$data_abtch[] = [
 					'id_rekap' => $dtsan->id_rekap,
 					'id_tindakan' => $idtindakan,
@@ -170,7 +174,7 @@ class Listdata extends CI_Controller
 					'nis' => $dtsan->nis,
 					'nominal' => $dtsan->nominal,
 					'ket' => $tindakan->pj,
-					'status' => $dtsan->status,
+					'status' => $stts,
 				];
 			}
 			$sql = $this->model->simpanBatchSantri('rekap', $data_abtch);

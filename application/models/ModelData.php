@@ -26,6 +26,13 @@ class ModelData extends CI_Model
         $this->db->where($where1, $dtwhere1);
         return $this->db->get($table);
     }
+    function getBy3($table, $where, $dtwhere, $where1, $dtwhere1, $where2, $dtwhere2)
+    {
+        $this->db->where($where, $dtwhere);
+        $this->db->where($where1, $dtwhere1);
+        $this->db->where($where2, $dtwhere2);
+        return $this->db->get($table);
+    }
 
     function getBy2Select($table, $where, $dtwhere, $where1, $dtwhere1, $select)
     {

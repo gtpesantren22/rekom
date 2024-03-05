@@ -101,7 +101,7 @@ class Listdata extends CI_Controller
 	public function delRekap($id)
 	{
 		$data = $this->model->getBy('rekap', 'id_rekap', $id)->row();
-		$data2 = $this->model->getBy2('rekap', 'nis', $data->nis, 'id_konversi', NULL)->row();
+		$data2 = $this->model->getBy3('rekap', 'nis', $data->nis, 'id_konversi', NULL, 'id_tindakan', $data->id_tindakan)->row();
 
 		$this->model->hapus('rekap', 'id_rekap', $id);
 		if ($this->db->affected_rows() > 0) {
@@ -115,7 +115,7 @@ class Listdata extends CI_Controller
 	public function lunas($id)
 	{
 		$data = $this->model->getBy('rekap', 'id_rekap', $id)->row();
-		$data2 = $this->model->getBy2('rekap', 'nis', $data->nis, 'id_konversi', NULL)->row();
+		$data2 = $this->model->getBy3('rekap', 'nis', $data->nis, 'id_konversi', NULL, 'id_tindakan', $data->id_tindakan)->row();
 
 		$this->model->edit('rekap', 'id_rekap', $id, ['status' => 'lunas']);
 		if ($this->db->affected_rows() > 0) {
@@ -139,7 +139,7 @@ class Listdata extends CI_Controller
 				$tindakan = $this->model->getBy('tindakan', 'id_tindakan', $idtindakan)->row();
 				$data_abtch = array();
 				foreach ($data as $dtsan) {
-					$cek = $this->model->getBy3('rekap', 'nis', $dtsan->nis, 'id_tindakan', $idtindakan, 'status', 'belum')->row();
+					$cek = $this->model->getBy4('rekap', 'nis', $dtsan->nis, 'id_tindakan', $idtindakan, 'status', 'belum', 'id_konversi !=', NULL)->row();
 					$stts = $cek ? 'belum' : 'lunas';
 					$data_abtch[] = [
 						'id_rekap' => $dtsan->id_rekap,
@@ -165,7 +165,7 @@ class Listdata extends CI_Controller
 			$tindakan = $this->model->getBy('tindakan', 'id_tindakan', $idtindakan)->row();
 			$data_abtch = array();
 			foreach ($data as $dtsan) {
-				$cek = $this->model->getBy3('rekap', 'nis', $dtsan->nis, 'id_tindakan', $idtindakan, 'status', 'belum')->row();
+				$cek = $this->model->getBy4('rekap', 'nis', $dtsan->nis, 'id_tindakan', $idtindakan, 'status', 'belum', 'id_konversi !=', NULL)->row();
 				$stts = $cek ? 'belum' : 'lunas';
 				$data_abtch[] = [
 					'id_rekap' => $dtsan->id_rekap,
